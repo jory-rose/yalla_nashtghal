@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -57,3 +58,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+# yalla_nashtghal
+مشروع تأمين فرص عمل يومية وساعية و ربط اصحاب الاعمال بالافراد المهتمين بالحصول على فرص عمل مؤقتة
+>>>>>>> 10bc51f3e0789799dfa9331d5b50f77ae7bfbf12
