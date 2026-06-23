@@ -18,7 +18,7 @@ return new class extends Migration {
     $table->text('description');
     $table->unsignedInteger('hours_per_day');
     $table->string('location');
-    $table->enum('gender', ['male', 'female', 'both']);
+    $table->enum('gender', ['male', 'female', 'any']);
     $table->enum('certificate', ['none', 'diploma', 'bachelor', 'master', 'phd']);
     $table->enum('work_type', ['onsite', 'remote', 'hybrid']);
     $table->enum('status', ['open', 'closed', 'paused'])->default('open');

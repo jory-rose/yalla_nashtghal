@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('type', ['full_time', 'part_time', 'freelance', 'internship']);
+            $table->enum('type', ['full_time', 'part_time', 'freelance', 'internship']); //اعمال حرة - وظائف بدوام كامل - وظائف بدوام جزئي - تدريب
             $table->foreignId('parent_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->timestamps();
         });
