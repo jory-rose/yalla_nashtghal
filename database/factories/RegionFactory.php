@@ -2,13 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\countries;
+use App\Models\regions;
+use App\Models\City;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<countries>
+ * @extends Factory<regions>
  */
-class CountriesFactory extends Factory
+class RegionFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +18,9 @@ class CountriesFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            //
+         return [
+            'name' => $this->faker->streetName(),
+            'city_id' => City::factory(),
         ];
     }
 }

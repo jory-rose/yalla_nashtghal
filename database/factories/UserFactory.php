@@ -25,11 +25,20 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'first_name' => $this->faker->firstName(),
+            'father_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'image' => null,
+            'phone' => $this->faker->phoneNumber(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'password' => Hash::make('password'),
+            'birth_date' => $this->faker->date(),
+            'gender' => $this->faker->randomElement(['male', 'female']),
+            'marital_status' => 'single',
+            'health_status' => 'healthy',
+            'certificate' => 'bachelor',
+            'skills' => json_encode(['Laravel', 'MySQL']),
+            'cv' => null,
         ];
     }
 

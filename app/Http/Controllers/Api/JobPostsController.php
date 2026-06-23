@@ -1,19 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+// app/Http/Controllers/Api/JobPostsController.php
 
-use App\Models\job_posts;
-use App\Http\Requests\Storejob_postsRequest;
-use App\Http\Requests\Updatejob_postsRequest;
+namespace App\Http\Controllers\Api; // ← تأكد هذا موجود مش App\Http\Controllers
+
+use App\Http\Controllers\Controller;
+use App\Models\JobPost;
+use Illuminate\Http\Request;
 
 class JobPostsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $jobs = JobPost::with(['company:id,name,image', 'category:id,name,type'])
+            ->when($request->status, fn($q) => $q->where('status', $request->status))
+            ->when($request->work_type, fn($q) => $q->where('work_type', $request->work_type))
+            ->when($request->search, fn($q) => $q->where('title', 'like', "%{$request->search}%"))
+            ->latest()
+            ->simplePaginate($request->per_page ?? 15);
+
+        return response()->json([
+            'success' => true,
+            'data' => $jobs,
+        ]);
     }
 
     /**
@@ -63,4 +72,23 @@ class JobPostsController extends Controller
     {
         //
     }
-}
+
+public function getByCategory(Request $request)
+{
+    $request->validate([
+        'type' => 'required|in:part_time,freelance',
+    ]);
+
+    $jobs = JobPost::with([
+            'company:id,name,image',
+            'category:id,name,type',
+        ])
+        ->whereHas('category', fn($q) => $q->where('type', $request->type))
+        ->latest()
+        ->paginate($request->per_page ?? 15);
+
+    return response()->json([
+        'success' => true,
+        'data'    => $jobs,
+    ]);
+}}

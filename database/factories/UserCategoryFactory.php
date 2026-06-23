@@ -1,14 +1,15 @@
 <?php
 
 namespace Database\Factories;
-
-use App\Models\job_posts;
+use App\Models\User;
+use App\Models\Category;
+use App\Models\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<job_posts>
+ * @extends Factory<Model>
  */
-class JobPostsFactory extends Factory
+class UserCategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +19,8 @@ class JobPostsFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::factory(),
+            'category_id' => Category::factory(),
         ];
     }
 }

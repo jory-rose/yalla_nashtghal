@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\reports;
+use App\Models\countries;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<reports>
+ * @extends Factory<Country>
  */
-class ReportsFactory extends Factory
+class CountryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,11 @@ class ReportsFactory extends Factory
      */
     public function definition(): array
     {
+        
+   
         return [
-            //
+            'name' => 'Country ' . $this->faker->country(),
         ];
+    
     }
 }
