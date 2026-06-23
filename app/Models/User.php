@@ -7,6 +7,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Carbon\Carbon; 
 
 class User extends Authenticatable
 {
@@ -19,20 +20,44 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'first_name', 'father_name', 'last_name',
+        'image', 'phone', 'email', 'password',
+        'birth_date', 'gender', 'marital_status',
+        'health_status', 'certificate',
+        'skills', 'cv',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
+    protected $hidden = ['password'];
+
+    protected $casts = [
+        'skills'     => 'array',
+        'birth_date' => 'date',
     ];
+
+    protected $appends = ['age'];
+
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->birth_date)->age;
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'user_categories');
+    }
+
+    public function applications()
+    {
+        return $this->belongsToMany(JobPost::class, 'applications')
+                    ->withPivot('status', 'cover_letter', 'work_type', 'applied_at')
+                    ->withTimestamps();
+    }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
+
 
     /**
      * Get the attributes that should be cast.
@@ -47,3 +72,10 @@ class User extends Authenticatable
         ];
     }
 }
+
+
+
+
+
+
+
